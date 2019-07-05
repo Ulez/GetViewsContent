@@ -9,17 +9,18 @@ public class MyAccessibilityService extends AccessibilityService {
     private static final String TAG = "MyAccessibilityService";
     private int mDebugDepth;
     private AccessibilityNodeInfo mNodeInfo;
+    private long lastTime = 0;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        Log.e(TAG, "onAccessibilityEvent==" + event.getClassName());
+//        Log.e(TAG, "onAccessibilityEvent==" + event.getClassName());
         mDebugDepth = 0;
         mNodeInfo = event.getSource();
         printAllViews(mNodeInfo);
-        Log.e(TAG, String.format(
-                "onAccessibilityEvent: type = [ %s ], class = [ %s ], package = [ %s ], time = [ %s ], text = [ %s ]",
-                getEventType(event), event.getClassName(), event.getPackageName(),
-                event.getEventTime(), getEventText(event)));
+//        Log.e(TAG, String.format(
+//                "onAccessibilityEvent: type = [ %s ], class = [ %s ], package = [ %s ], time = [ %s ], text = [ %s ]",
+//                getEventType(event), event.getClassName(), event.getPackageName(),
+//                event.getEventTime(), getEventText(event)));
     }
 
     private CharSequence getEventText(AccessibilityEvent event) {
@@ -27,7 +28,7 @@ public class MyAccessibilityService extends AccessibilityService {
         try {
             xx = event.getText().get(0);
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+//            Log.e(TAG, e.getMessage());
         } finally {
             return xx;
         }
@@ -47,8 +48,14 @@ public class MyAccessibilityService extends AccessibilityService {
         for (int i = 0; i < mDebugDepth; i++) {
             log += ".";
         }
-        log += "(" + mNodeInfo.getText() + " <-- " + mNodeInfo.getViewIdResourceName() + ")";
-        Log.e(TAG, log);
+        if (mDebugDepth >= 6 && Config.packageName.equals(mNodeInfo.getPackageName().toString()) && Config.TextName.equals(mNodeInfo.getClassName().toString())) {
+            CharSequence text = mNodeInfo.getText();
+            if (System.currentTimeMillis() - lastTime > 800) {
+//                log += "(" + text + " <-- " + mNodeInfo.getViewIdResourceName() + ")";
+                Log.e(TAG, "asr=" + text);
+                lastTime = System.currentTimeMillis();
+            }
+        }
         if (mNodeInfo.getChildCount() < 1) return;
         mDebugDepth++;
         for (int i = 0; i < mNodeInfo.getChildCount(); i++) {
