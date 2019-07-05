@@ -6,11 +6,15 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MyAccessibilityService extends AccessibilityService {
     private static final String TAG = "MyAccessibilityService";
     private int mDebugDepth;
     private AccessibilityNodeInfo mNodeInfo;
     private long lastTime = 0;
+    private static final String pattern = "\"(.*)\" # ";
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -60,8 +64,19 @@ public class MyAccessibilityService extends AccessibilityService {
             CharSequence text = mNodeInfo.getText();
             if (System.currentTimeMillis() - lastTime > 800) {
 //                log += "(" + text + " <-- " + mNodeInfo.getViewIdResourceName() + ")";
-                Log.e(TAG, "asr=" + text);
-                Toast.makeText(MyAccessibilityService.this, text.toString(), Toast.LENGTH_SHORT).show();
+                String result = text.toString();
+                // 创建 Pattern 对象
+                Pattern r = Pattern.compile(pattern);
+                // 现在创建 matcher 对象
+                Matcher m = r.matcher(result);
+                if (m.find()) {
+                    System.out.println("Found value: " + m.group(1));
+                    result = m.group(1);
+                } else {
+                    result = "";
+                }
+                Toast.makeText(MyAccessibilityService.this, result, Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "asr=" + result);
                 lastTime = System.currentTimeMillis();
             }
         }
