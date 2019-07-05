@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">小米助手文本</string>
     <string name="accessibility_service_description">获取小米助手文本信息</string>
+    <string name="dec">更多设置->无障碍->开启：小米助手文本</string>
 </resources>
