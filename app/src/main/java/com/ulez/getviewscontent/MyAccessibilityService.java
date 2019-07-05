@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.widget.Toast;
 
 public class MyAccessibilityService extends AccessibilityService {
     private static final String TAG = "MyAccessibilityService";
@@ -60,6 +61,7 @@ public class MyAccessibilityService extends AccessibilityService {
             if (System.currentTimeMillis() - lastTime > 800) {
 //                log += "(" + text + " <-- " + mNodeInfo.getViewIdResourceName() + ")";
                 Log.e(TAG, "asr=" + text);
+                Toast.makeText(MyAccessibilityService.this, text.toString(), Toast.LENGTH_SHORT).show();
                 lastTime = System.currentTimeMillis();
             }
         }
