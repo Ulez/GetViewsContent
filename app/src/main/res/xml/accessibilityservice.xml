@@ -3,4 +3,5 @@
     android:accessibilityEventTypes="typeAllMask"
     android:accessibilityFeedbackType="feedbackSpoken"
     android:canRetrieveWindowContent="true"
+    android:packageNames="com.miui.voiceassist"
     android:notificationTimeout="1000" />

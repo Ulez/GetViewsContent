@@ -34,12 +34,19 @@ public class MyAccessibilityService extends AccessibilityService {
         }
     }
 
+    @Override
+    protected void onServiceConnected() {
+//        Log.e(TAG,"onServiceConnected");
+        super.onServiceConnected();
+    }
+
     private int getEventType(AccessibilityEvent event) {
         return event.getEventType();
     }
 
     @Override
     public void onInterrupt() {
+//        Log.e(TAG, "onInterrupt==");
     }
 
     private void printAllViews(AccessibilityNodeInfo mNodeInfo) {
