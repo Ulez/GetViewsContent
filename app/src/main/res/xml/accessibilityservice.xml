@@ -4,5 +4,5 @@
     android:accessibilityEventTypes="typeAllMask"
     android:accessibilityFeedbackType="feedbackSpoken"
     android:canRetrieveWindowContent="true"
-    android:packageNames="com.miui.voiceassist"
+    android:packageNames="com.haier.uhome.uplus"
     android:notificationTimeout="1000" />

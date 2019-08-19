@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">小米助手文本</string>
-    <string name="accessibility_service_description">获取小米助手文本信息</string>
-    <string name="dec">1.更多设置->无障碍->开启：小米助手文本\n 2.左键长按锁住，加入白名单</string>
+    <string name="app_name">海尔优家助手</string>
+    <string name="accessibility_service_description">获取海尔优家文本信息</string>
+    <string name="dec">1.更多设置->无障碍->开启：海尔优家助手文本\n 2.左键长按锁住，加入白名单</string>
 </resources>
