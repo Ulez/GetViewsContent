@@ -77,6 +77,10 @@ public class MyAccessibilityService extends AccessibilityService {
             mNodeInfo.getBoundsInScreen(outBounds);
             if (outBounds.right==840){
                 Log.i(TAG, index + ":text=" + text);
+                if (index>lastIndex){
+                    lastIndex = Math.max(lastIndex,index);
+                    Log.i(TAG, index + ":最后一条文本为:" + text);
+                }
             }
             index++;
         }
