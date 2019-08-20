@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.bt).setOnClickListener(this);
         startService(new Intent(this, MyAccessibilityService.class));
-//        Log.e("lcy","startService");
+        Log.e("lcy","start  MyAccessibilityService");
     }
 
     @Override

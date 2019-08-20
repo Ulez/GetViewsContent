@@ -47,8 +47,14 @@ public class MyAccessibilityService extends AccessibilityService {
     }
 
     @Override
+    public void onCreate() {
+        Log.e(TAG, "----onCreate----");
+        super.onCreate();
+    }
+
+    @Override
     protected void onServiceConnected() {
-//        Log.e(TAG,"onServiceConnected");
+        Log.e(TAG, "onServiceConnected");
         super.onServiceConnected();
     }
 
@@ -75,11 +81,12 @@ public class MyAccessibilityService extends AccessibilityService {
         if (mDebugDepth == 9 && !TextUtils.isEmpty(text) && !"  ".equals(text)) {
             Rect outBounds = new Rect();
             mNodeInfo.getBoundsInScreen(outBounds);
-            if (outBounds.right==840){
+            if (outBounds.right == 840) {
                 Log.i(TAG, index + ":text=" + text);
-                if (index>lastIndex){
-                    lastIndex = Math.max(lastIndex,index);
+                if (index > lastIndex) {
+                    lastIndex = Math.max(lastIndex, index);
                     Log.i(TAG, index + ":最后一条文本为:" + text);
+                    Toast.makeText(MyAccessibilityService.this, text, Toast.LENGTH_LONG).show();
                 }
             }
             index++;
